@@ -2,6 +2,8 @@ package com.example.project1
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
+import kotlinx.android.synthetic.main.activity_settings.*
 
 class Settings : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -10,6 +12,9 @@ class Settings : AppCompatActivity() {
         supportActionBar!!.title = "Settings"
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
+//        applyChangesBtn.setOnClickListener {
+//
+//        }
 
 
     }
