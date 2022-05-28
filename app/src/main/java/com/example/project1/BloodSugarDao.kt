@@ -12,6 +12,10 @@ interface BloodSugarDao {
     @Query("select * from bloodsugar")
     fun selectAllBloodSugar(): LiveData<List<BloodSugar>>
 
+    // for daily average statistics
+    @Query("select date as day, AVG(sugar_conc) as dailyAvg from bloodsugar group by date order by date")
+    fun selectDailyAvg(): LiveData<List<DailyAvgStat>>
+
     @Update
     fun updateBloodSugar(bsugar: BloodSugar)
 
