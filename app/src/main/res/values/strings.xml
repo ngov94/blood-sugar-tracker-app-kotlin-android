@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Blood Sugar Tracker</string>
+    <string name="mmol_unit">mmol/L</string>
+    <string name="mg_unit">mg/dL</string>
 </resources>

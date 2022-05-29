@@ -14,10 +14,11 @@
         android:text="Blood Sugar Concentration Unit:"
         android:textColor="@color/black"
         android:textSize="23sp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_marginStart="20dp"
         />
     <RadioGroup
+        android:id="@+id/radioSugarUnit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:checkedButton="@id/radiommolL"
@@ -58,7 +59,8 @@
         android:layout_height="wrap_content"
         android:hint="Hypo"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -72,6 +74,7 @@
             />
 
         <TextView
+            android:id="@+id/unit1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="mmol/L"
@@ -86,7 +89,7 @@
         android:text="Target Range:"
         android:textColor="@color/black"
         android:textSize="18sp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="20dp"
         />
 
@@ -102,6 +105,7 @@
             android:hint="Low"
             android:layout_marginStart="25dp"
             android:layout_marginTop="4dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             >
 
             <com.google.android.material.textfield.TextInputEditText
@@ -114,6 +118,7 @@
                 />
 
             <TextView
+                android:id="@+id/unit2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="mmol/L"
@@ -126,10 +131,10 @@
             android:id="@+id/targetDash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="-"
-            android:textSize="50sp"
             android:layout_toRightOf="@id/tarLowL"
-            />
+            android:text="-"
+            android:layout_marginStart="10dp"
+            android:textSize="50sp" />
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -139,6 +144,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="4dp"
             android:layout_toRightOf="@id/targetDash"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             >
 
             <com.google.android.material.textfield.TextInputEditText
@@ -151,6 +157,7 @@
                 />
 
             <TextView
+                android:id="@+id/unit3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="mmol/L"
@@ -167,7 +174,8 @@
         android:layout_height="wrap_content"
         android:hint="Hyper"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -180,6 +188,7 @@
             />
 
         <TextView
+            android:id="@+id/unit4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="mmol/L"
@@ -194,7 +203,7 @@
         android:layout_height="wrap_content"
         android:text="Apply Changes"
         android:textSize="22sp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center"
         />
 

@@ -6,15 +6,27 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.Toast
+import com.example.project1.databinding.ActivityMainBinding
+
 
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+    lateinit var mvm: MasterViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         supportActionBar!!.title = "Blood Sugar Tracker"
+
+
+
+
+
+
     }
 
 
@@ -25,15 +37,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-//        var selectedOption = ""
-//
-//        when(item.itemId)
-//        {
-//            R.id.menu_settings -> selectedOption = "Settings"
-//        }
-//        Toast.makeText(this,"Option : $selectedOption", Toast.LENGTH_SHORT).show()
-
         var settingsIntent = Intent(this,Settings::class.java)
         startActivity(settingsIntent)
 
