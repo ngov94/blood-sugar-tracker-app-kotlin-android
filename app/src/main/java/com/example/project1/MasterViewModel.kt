@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
-class MasterViewModel(app: Application): AndroidViewModel(app) {
+class MasterViewModel(app: Application) : AndroidViewModel(app) {
 
     private val repo: MasterRepository
     val latestMaster: LiveData<Master>?

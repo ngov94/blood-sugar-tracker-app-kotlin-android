@@ -1,10 +1,12 @@
 package com.example.project1
 
+import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.project1.databinding.ActivitySettingsBinding
+import kotlinx.android.synthetic.main.activity_add_bsrecord.*
 import kotlinx.android.synthetic.main.activity_settings.*
 
 
@@ -27,13 +29,95 @@ class Settings : AppCompatActivity() {
 
         mvm = MasterViewModel(application)
 
+        // Field Validation
+        hypoFocusListener()
+        hyperFocusListener()
+        tarLowFocusListener()
+        tarHighFocusListener()
+
         mvm.latestMaster?.observe(this){ latestMaster ->
             getLatestMaster(latestMaster)
+        }
+
+        binding.clearForm.setOnClickListener {
+            binding.hypoRange.setText("")
+            binding.hyperRange.setText("")
+            binding.tarLow.setText("")
+            binding.tarHigh.setText("")
+
+            binding.hypoRangeL.helperText = "Required"
+            binding.hyperRangeL.helperText = "Required"
+            binding.tarLowL.helperText = "Required"
+            binding.tarHighL.helperText = "Required"
         }
 
         setOnCheckedChangeListener()
 
         binding.applyChangesBtn.setOnClickListener {
+
+            val invalidForm = AlertDialog.Builder(this)
+                .setTitle("Invalid Settings")
+                .setMessage("Missing or Invalid Values\n\nSettings Not Updated")
+                .setPositiveButton("Okay"){ _,_ ->
+                    // do nothing
+                }
+
+            if(hypoRangeL.helperText != null){
+                hypoRangeL.helperText = null
+                hypoRangeL.error = "Required"
+                invalidForm.show()
+                return@setOnClickListener
+            }
+            else if(hypoRangeL.error != null){
+                invalidForm.show()
+                return@setOnClickListener
+            }
+            else if(hyperRangeL.helperText != null){
+                hyperRangeL.helperText = null
+                hyperRangeL.error = "Required"
+                invalidForm.show()
+                return@setOnClickListener
+            }
+            else if(hyperRangeL.error != null){
+                invalidForm.show()
+                return@setOnClickListener
+            }
+            else if(tarLowL.helperText != null){
+                tarLowL.helperText = null
+                tarLowL.error = "Required"
+                invalidForm.show()
+                return@setOnClickListener
+            }
+            else if(tarLowL.error != null){
+                invalidForm.show()
+                return@setOnClickListener
+            }
+            else if(tarHighL.helperText != null){
+                tarHighL.helperText = null
+                tarHighL.error = "Required"
+                invalidForm.show()
+                return@setOnClickListener
+            }
+            else if(tarHighL.error != null){
+                invalidForm.show()
+                return@setOnClickListener
+            }
+
+            val ho = hypoRange.text.toString().toDouble()
+            val hy = hyperRange.text.toString().toDouble()
+            val tl = tarLow.text.toString().toDouble()
+            val th = tarHigh.text.toString().toDouble()
+
+            if(!(ho < tl && tl < th && th < hy)){
+                AlertDialog.Builder(this)
+                    .setTitle("Invalid Settings")
+                    .setMessage("Range is Invalid\n\nSettings Not Updated")
+                    .setPositiveButton("Okay"){ _,_ ->
+                        // do nothing
+                    }
+                return@setOnClickListener
+            }
+
             binding.applyChangesBtn.isEnabled = false
 
             var sugarUnit: String
@@ -90,6 +174,55 @@ class Settings : AppCompatActivity() {
         binding.tarLow.setText(latestMaster.tarRangeLow.toString())
         binding.tarHigh.setText(latestMaster.tarRangeHigh.toString())
 
+    }
+
+    private fun hypoFocusListener(){
+        binding.hypoRange.setOnFocusChangeListener { _, focused ->
+            if(!focused){
+                binding.hypoRangeL.helperText = null
+                binding.hypoRangeL.error = validConc(binding.hypoRange.text.toString())
+            }
+        }
+    }
+
+    private fun hyperFocusListener(){
+        binding.hyperRange.setOnFocusChangeListener { _, focused ->
+            if(!focused){
+                binding.hyperRangeL.helperText = null
+                binding.hyperRangeL.error = validConc(binding.hyperRange.text.toString())
+            }
+        }
+    }
+
+    private fun tarLowFocusListener(){
+        binding.tarLow.setOnFocusChangeListener { _, focused ->
+            if(!focused){
+                binding.tarLowL.helperText = null
+                binding.tarLowL.error = validConc(binding.tarLow.text.toString())
+            }
+        }
+    }
+
+    private fun tarHighFocusListener(){
+        binding.tarHigh.setOnFocusChangeListener { _, focused ->
+            if(!focused){
+                binding.tarHighL.helperText = null
+                binding.tarHighL.error = validConc(binding.tarHigh.text.toString())
+            }
+        }
+    }
+
+    private fun validConc(value: String): String?{
+
+        val regex = Regex("\\d{1,3}(\\.\\d{0,1})?")
+        if(value.equals("")){
+            return "Required"
+        }
+        else if(!value.matches(regex)){
+            return "Invalid Value"
+        }
+
+        return null
     }
 
 

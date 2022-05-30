@@ -10,7 +10,7 @@ import java.sql.Time
 
 @Entity(tableName = "bloodsugar", foreignKeys = [ForeignKey(entity = Master::class, parentColumns = ["mid"], childColumns = ["mid"])])
 data class BloodSugar(@PrimaryKey(autoGenerate = true) var bsid: Int? = null,
-                      @ColumnInfo(name = "sugar_conc") var sugarConc: Double,
+                      var sugarConc: Double,
                       var measured: String,
                       var date: Date,
                       var time: Time,
@@ -21,11 +21,25 @@ data class BloodSugar(@PrimaryKey(autoGenerate = true) var bsid: Int? = null,
 
 @Entity(tableName = "master")
 data class Master(@PrimaryKey(autoGenerate = true) var mid: Int? = null,
-                  @ColumnInfo(name = "sugar_unit") var sugarUnit: String,
-                  @ColumnInfo(name = "target_range_low") var tarRangeLow: Double,
-                  @ColumnInfo(name = "target_range_high") var tarRangeHigh: Double,
+                  var sugarUnit: String,
+                  var tarRangeLow: Double,
+                  var tarRangeHigh: Double,
                   var hypo: Double,
-                  var hyper: Double,
+                  var hyper: Double
                   )
 
 data class DailyAvgStat(var day: Date, var dailyAvg: Double)
+
+data class BSMaster(var bsid: Int,
+                    var sugarConc: Double,
+                    var measured: String,
+                    var date: Date,
+                    var time: Time,
+                    var notes: String,
+                    var mid: Int,
+                    var sugarUnit: String,
+                    var tarRangeLow: Double,
+                    var tarRangeHigh: Double,
+                    var hypo: Double,
+                    var hyper: Double)
+

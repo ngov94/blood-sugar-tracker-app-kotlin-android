@@ -58,6 +58,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:hint="Hypo"
+        app:helperTextTextColor="@color/error_red"
         android:layout_marginStart="25dp"
         android:layout_marginTop="10dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -103,6 +104,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:hint="Low"
+            app:helperTextTextColor="@color/error_red"
             android:layout_marginStart="25dp"
             android:layout_marginTop="4dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -138,9 +140,11 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tarHighL"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:hint="High"
+            app:helperTextTextColor="@color/error_red"
             android:layout_marginStart="10dp"
             android:layout_marginTop="4dp"
             android:layout_toRightOf="@id/targetDash"
@@ -173,6 +177,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:hint="Hyper"
+        app:helperTextTextColor="@color/error_red"
         android:layout_marginStart="25dp"
         android:layout_marginTop="10dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -206,6 +211,14 @@
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
         />
+
+    <TextView
+        android:id="@+id/clearForm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clear Form"
+        android:textSize="20sp"
+        android:layout_gravity="center"/>
 
 
 

@@ -22,7 +22,16 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar!!.title = "Blood Sugar Tracker"
 
+        mvm = MasterViewModel(application)
 
+        mvm.latestMaster?.observe(this){ latestMaster ->
+            isMasterNull(latestMaster)
+        }
+
+        binding.bsrecords.setOnClickListener {
+            var bsRecordsIntent = Intent(this, BloodSugarRecords::class.java)
+            startActivity(bsRecordsIntent)
+        }
 
 
 
@@ -41,6 +50,19 @@ class MainActivity : AppCompatActivity() {
         startActivity(settingsIntent)
 
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun  isMasterNull(latest: Master?) {
+        if (latest == null) {
+            var intialMaster = Master(
+                sugarUnit = "mmol/L",
+                hypo = 3.9,
+                hyper = 10.0,
+                tarRangeLow = 5.0,
+                tarRangeHigh = 8.9
+            )
+            mvm.insertMaster(intialMaster)
+        }
     }
 }
 

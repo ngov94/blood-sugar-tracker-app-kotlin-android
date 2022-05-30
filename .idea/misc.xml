@@ -3,8 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Revature/Training/AndroidProjects/Project1/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Revature/Training/AndroidProjects/Project1/app/src/main/res/drawable-v24/ic_plus_solid.xml" value="0.261" />
+        <entry key="..\:/Revature/Training/AndroidProjects/Project1/app/src/main/res/layout/activity_add_bsrecord.xml" value="0.27291666666666664" />
+        <entry key="..\:/Revature/Training/AndroidProjects/Project1/app/src/main/res/layout/activity_blood_sugar_records.xml" value="0.27291666666666664" />
+        <entry key="..\:/Revature/Training/AndroidProjects/Project1/app/src/main/res/layout/activity_main.xml" value="0.2361111111111111" />
         <entry key="..\:/Revature/Training/AndroidProjects/Project1/app/src/main/res/layout/activity_settings.xml" value="0.27291666666666664" />
+        <entry key="..\:/Revature/Training/AndroidProjects/Project1/app/src/main/res/layout/activity_update_bsrecord.xml" value="0.27291666666666664" />
+        <entry key="..\:/Revature/Training/AndroidProjects/Project1/app/src/main/res/layout/bs_list_item_layout.xml" value="0.33" />
+        <entry key="..\:/Revature/Training/AndroidProjects/Project1/app/src/main/res/layout/menu_item_layout.xml" value="0.25885416666666666" />
       </map>
     </option>
   </component>

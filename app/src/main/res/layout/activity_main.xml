@@ -6,32 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
+    android:gravity="center"
     >
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textSize="40sp"
-         />
 
     <Button
         android:id="@+id/bsrecords"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="200dp"
         android:text="Blood Sugar Records"
         android:textSize="25sp"
-        android:layout_marginTop="100dp"
         />
 
     <Button
         android:id="@+id/stats"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="200dp"
         android:text="Statistics"
         android:textSize="25sp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="60dp"
         />
 
 </LinearLayout>

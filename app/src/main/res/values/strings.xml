@@ -2,4 +2,14 @@
     <string name="app_name">Blood Sugar Tracker</string>
     <string name="mmol_unit">mmol/L</string>
     <string name="mg_unit">mg/dL</string>
+
+    <string-array name="measured">
+        <item>Before Breakfast</item>
+        <item>After Breakfast</item>
+        <item>Before Lunch</item>
+        <item>After Lunch</item>
+        <item>Before Dinner</item>
+        <item>After Dinner</item>
+        <item>Fasting</item>
+    </string-array>
 </resources>
