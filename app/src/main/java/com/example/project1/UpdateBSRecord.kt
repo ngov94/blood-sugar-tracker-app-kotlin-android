@@ -55,16 +55,23 @@ class UpdateBSRecord : AppCompatActivity() {
         binding.unit.setText(intent.getStringExtra("unit"))
 
         binding.clearForm.setOnClickListener {
-            binding.sugarConc.setText("")
-            binding.autoCompleteMeasured.setText("")
-            binding.date.setText("")
-            binding.time.setText("")
-            binding.notes.setText("")
+            AlertDialog.Builder(this)
+                .setTitle("Are you sure you want to clear the form?")
+                .setPositiveButton("No"){ _,_ ->
+                    // do nothing
+                }
+                .setNegativeButton("Yes"){ _,_ ->
+                    binding.sugarConc.setText("")
+                    binding.autoCompleteMeasured.setText("")
+                    binding.date.setText("")
+                    binding.time.setText("")
+                    binding.notes.setText("")
 
-            binding.sugarConcL.helperText = "Required"
-            binding.measuredmenu.helperText = "Required"
-            binding.dateL.helperText = "Required"
-            binding.timeL.helperText = "Required"
+                    binding.sugarConcL.helperText = "Required"
+                    binding.measuredmenu.helperText = "Required"
+                    binding.dateL.helperText = "Required"
+                    binding.timeL.helperText = "Required"
+                }.show()
         }
 
         val measuredList = resources.getStringArray(R.array.measured)
@@ -85,7 +92,7 @@ class UpdateBSRecord : AppCompatActivity() {
 
             val invalidForm = AlertDialog.Builder(this)
                 .setTitle("Invalid Form")
-                .setMessage("Missing or Invalid Values\n\nRecord Not Updated")
+                .setMessage("Missing or Invalid Values\nRecord Not Updated")
                 .setPositiveButton("Okay"){ _,_ ->
                     // do nothing
                 }

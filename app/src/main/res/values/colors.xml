@@ -11,4 +11,5 @@
     <color name="dark_orange">#F69609</color>
     <color name="dark_red">#CC2518</color>
     <color name="error_red">#BD2014</color>
+    <color name="trans_Purple">#68BB86FC</color>
 </resources>

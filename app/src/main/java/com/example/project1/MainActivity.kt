@@ -32,10 +32,6 @@ class MainActivity : AppCompatActivity() {
             var bsRecordsIntent = Intent(this, BloodSugarRecords::class.java)
             startActivity(bsRecordsIntent)
         }
-
-
-
-
     }
 
 

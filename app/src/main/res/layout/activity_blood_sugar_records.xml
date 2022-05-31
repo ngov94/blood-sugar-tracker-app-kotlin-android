@@ -8,15 +8,21 @@
     android:orientation="vertical"
     android:id="@+id/bloodsugarrecordsView">
 
-    <com.google.android.material.textfield.TextInputLayout
+    <include layout="@layout/progress_overlay"/>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/sortBymenu"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
-        android:layout_width="135dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:hint="Sort By"
         android:layout_marginTop="20dp"
         android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp">
+        >
 
         <AutoCompleteTextView
             android:id="@+id/autoCompleteSortBy"
@@ -27,6 +33,19 @@
             />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="25dp" />
+
+        
+        
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/noRecords"
@@ -48,6 +67,34 @@
         tools:listitem="@layout/bs_list_item_layout"
         android:visibility="invisible"
         />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/nextPage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next Page"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="25dp"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:visibility="invisible"
+            />
+
+        <Button
+            android:id="@+id/prevPage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Prev Page"
+            android:layout_marginStart="25dp"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:visibility="invisible"
+            />
+
+    </RelativeLayout>
+
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

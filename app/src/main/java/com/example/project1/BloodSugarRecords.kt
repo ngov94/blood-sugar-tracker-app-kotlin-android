@@ -4,19 +4,26 @@ import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.TextView
+import android.widget.FrameLayout
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.project1.databinding.ActivityBloodSugarRecordsBinding
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_add_bsrecord.view.*
 import kotlinx.android.synthetic.main.activity_blood_sugar_records.*
 import kotlinx.android.synthetic.main.bs_list_item_layout.view.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.sql.Date
 import java.sql.Time
 import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class BloodSugarRecords : AppCompatActivity() {
@@ -24,14 +31,31 @@ class BloodSugarRecords : AppCompatActivity() {
     lateinit var bsmvm: BloodSugarMasterViewModel
     lateinit var bsvm: BloodSugarViewModel
     var bsmList = ArrayList<BSMaster>()
-    var adapter: BloodSugarAdapter =  BloodSugarAdapter(bsmList)
 
+    var bsmListCurrent = ArrayList<BSMaster>()
+
+    var bsmListNewtoOld = ArrayList<BSMaster>()
+    var bsmListOldtoNew = ArrayList<BSMaster>()
+    var bsmListHightoLow = ArrayList<BSMaster>()
+    var bsmListLowtoHigh = ArrayList<BSMaster>()
+
+    var p = 0
+    var totalItems = 0
+    var pmax = 0
+    val LIMIT = 5
+    var selection = ""
+
+    lateinit var progressLayout : FrameLayout
+
+    var adapter: BloodSugarAdapter =  BloodSugarAdapter(bsmList)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBloodSugarRecordsBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        progressLayout = findViewById(R.id.progress_overlay)
 
         supportActionBar!!.title = "Blood Sugar Records"
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -43,19 +67,136 @@ class BloodSugarRecords : AppCompatActivity() {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
-        bsmvm.allBloodSugarMaster?.observe(this){ bsmList ->
+
+//        bsmvm.allBloodSugarMaster?.observe(this){ bsmList ->
+//            this.bsmListAll.clear()
+//            this.bsmListAll.addAll(bsmList)
+//            getBloodSugarRecords(bsmList)
+//        }
+
+        // Pagnation
+        bsmvm.bsmPages?.observe(this){  bsmList ->
+            this.bsmListCurrent.clear()
+            this.bsmListCurrent.addAll(bsmList)
             getBloodSugarRecords(bsmList)
+            nextPrevButtonVisability()
+            progressGone()
+
+        }
+
+        bsmvm.totalResults?.observe(this){
+            totalItems = it
+            pmax = (totalItems-1)/LIMIT
+            nextPrevButtonVisability()
+        }
+
+        binding.nextPage.setOnClickListener {
+            progressVisable()
+            var offset = ++p * LIMIT
+            pageloader(offset)
+        }
+
+        binding.prevPage.setOnClickListener {
+            progressVisable()
+            var offset = --p * LIMIT
+            pageloader(offset)
         }
 
         //Sorting
+        bsmvm.allBSMNewtoOld?.observe(this){ sortbsmList ->
+            bsmListNewtoOld.clear()
+            bsmListNewtoOld.addAll(sortbsmList)
+            if(selection.equals("New to Old")){
+                getBloodSugarRecords(bsmListNewtoOld)
+                nextPrevButtonVisability()
+                progressGone()
+
+            }
+        }
+
+        bsmvm.allBSMOldtoNew?.observe(this){ sortbsmList ->
+            bsmListOldtoNew.clear()
+            bsmListOldtoNew.addAll(sortbsmList)
+            if(selection.equals("Old to New")){
+                getBloodSugarRecords(bsmListOldtoNew)
+                nextPrevButtonVisability()
+                progressGone()
+            }
+        }
+
+        bsmvm.allBSMHightoLow?.observe(this){ sortbsmList ->
+            bsmListHightoLow.clear()
+            bsmListHightoLow.addAll(sortbsmList)
+            if(selection.equals("High to Low")){
+                getBloodSugarRecords(bsmListHightoLow)
+                nextPrevButtonVisability()
+                progressGone()
+
+            }
+        }
+
+        bsmvm.allBSMLowtoHigh?.observe(this){ sortbsmList ->
+            bsmListLowtoHigh.clear()
+            bsmListLowtoHigh.addAll(sortbsmList)
+            if(selection.equals("Low to High")){
+                getBloodSugarRecords(bsmListLowtoHigh)
+                nextPrevButtonVisability()
+
+                progressGone()
+
+            }
+        }
+
+
         val items = listOf("Old to New", "New to Old", "High to Low", "Low to High")
         val adapterArray = ArrayAdapter(this, R.layout.menu_item_layout, items)
         binding.autoCompleteSortBy.setAdapter(adapterArray)
 
         binding.autoCompleteSortBy.setOnItemClickListener { adapterView, view, i, l ->
             var selectedSort = adapterView.getItemAtPosition(i) as String
+            this.p = 0
+            progressVisable()
+
+            nextPrevButtonVisability()
+            when(selectedSort){
+                "Old to New" -> {getBloodSugarRecords(this.bsmListOldtoNew)
+                                selection = "Old to New"}
+                "New to Old" -> {getBloodSugarRecords(this.bsmListNewtoOld)
+                                selection = "New to Old"}
+                "High to Low" -> {getBloodSugarRecords(this.bsmListHightoLow)
+                                selection = "High to Low"}
+                "Low to High" -> {getBloodSugarRecords(this.bsmListLowtoHigh)
+                                selection = "Low to High"}
+            }
+
+            progressGone()
             Toast.makeText(this, "${selectedSort} has been selected", Toast.LENGTH_LONG).show()
         }
+
+        // Search
+        bsmvm.searchStringBSM?.observe(this){ searchbsmList ->
+            getBloodSugarRecords(searchbsmList)
+        }
+
+        binding.searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(searchItem: String?): Boolean {
+                var searchItemTrim = searchItem.toString().trim()
+                if((searchItemTrim != null) && (!searchItemTrim.equals(""))){
+                    var upperSearchItem = "%"+searchItemTrim.toString().uppercase(Locale.getDefault())+"%"
+                    bsmvm.selectAllBSMNotes(upperSearchItem)
+                }
+                return false
+            }
+            override fun onQueryTextChange(searchItem: String?): Boolean {
+                return false
+            }
+        })
+
+        binding.searchView.setOnCloseListener {
+            getBloodSugarRecords(this.bsmListCurrent)
+            false
+        }
+
 
         // Insert Blood Record
         binding.btnAddBSRecord.setOnClickListener {
@@ -109,7 +250,7 @@ class BloodSugarRecords : AppCompatActivity() {
 
                 var deleteRecord = BloodSugar(bsid,sugarConc,measured,date,time,notes,mid)
 
-                bsvm.deleteBloodSugar(deleteRecord)
+
 
                 val snackbarYes = Snackbar.make(bloodsugarrecordsView!!, "Record Deleted", Snackbar.LENGTH_LONG)
 
@@ -118,34 +259,16 @@ class BloodSugarRecords : AppCompatActivity() {
 
                 AlertDialog.Builder(this@BloodSugarRecords)
                     .setTitle("Confirm Deletion")
-                    .setPositiveButton("Yes"){ _,_ ->
+                    .setNegativeButton("Yes"){ _,_ ->
+                        bsvm.deleteBloodSugar(deleteRecord)
                         snackbarYes.show()
                     }
-                    .setNegativeButton("No"){ _,_ ->
-                        bsvm.insertBloodSugar(deleteRecord)
+                    .setPositiveButton("No"){ _,_ ->
+                        binding.autoCompleteSortBy.setText("")
                         snackbarNo.show()
-                    }
-
-//                val snackbar = Snackbar.make(bloodsugarrecordsView!!, "Record Deleted", Snackbar.LENGTH_LONG)
-//                    .setAction("UNDO", object : View.OnClickListener {
-//                        override fun onClick(view: View) {
-//                            val snackbar1 = Snackbar.make(
-//                                bloodsugarrecordsView!!,
-//                                "Record Restored",
-//                                Snackbar.LENGTH_SHORT
-//                            )
-//                            bsvm.insertBloodSugar(deleteRecord)
-//                            snackbar1.show()
-//                            return
-//                        }
-//                    })
-//                snackbar.show()
-
+                    }.show()
             }
         })
-
-
-
 
     }
 
@@ -161,8 +284,46 @@ class BloodSugarRecords : AppCompatActivity() {
             binding.noRecords.visibility = View.GONE
         }
 
-
         adapter.notifyDataSetChanged()//let adapter know the data changed
     }
+
+    fun nextPrevButtonVisability(){
+        if (pmax>p){
+            binding.nextPage.visibility = View.VISIBLE
+        }
+        else{
+            binding.nextPage.visibility = View.INVISIBLE
+        }
+
+        if(p != 0){
+            binding.prevPage.visibility = View.VISIBLE
+        }
+        else{
+            binding.prevPage.visibility = View.INVISIBLE
+        }
+    }
+
+    fun pageloader(offset: Int){
+
+        when(selection){
+            "Old to New" -> bsmvm.selectAllBloodSugarMasterOldtoNew(offset)
+            "New to Old" -> bsmvm.selectAllBloodSugarMasterNewtoOld(offset)
+            "High to Low" -> bsmvm.selectAllBloodSugarMasterHightoLow(offset)
+            "Low to High" -> bsmvm.selectAllBloodSugarMasterLowtoHigh(offset)
+            else -> bsmvm.selectAllBloodSugarMasterPage(offset)
+        }
+
+    }
+
+    fun progressVisable(){
+        progressLayout.visibility = View.VISIBLE
+    }
+
+    fun progressGone(){
+        Handler().postDelayed({
+            progressLayout.visibility = View.GONE
+        }, 1000)
+    }
+
 
 }

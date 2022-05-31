@@ -40,15 +40,22 @@ class Settings : AppCompatActivity() {
         }
 
         binding.clearForm.setOnClickListener {
-            binding.hypoRange.setText("")
-            binding.hyperRange.setText("")
-            binding.tarLow.setText("")
-            binding.tarHigh.setText("")
+            AlertDialog.Builder(this)
+                .setTitle("Are you sure you want to clear the form?")
+                .setPositiveButton("No"){ _,_ ->
+                    // do nothing
+                }
+                .setNegativeButton("Yes") { _, _ ->
+                    binding.hypoRange.setText("")
+                    binding.hyperRange.setText("")
+                    binding.tarLow.setText("")
+                    binding.tarHigh.setText("")
 
-            binding.hypoRangeL.helperText = "Required"
-            binding.hyperRangeL.helperText = "Required"
-            binding.tarLowL.helperText = "Required"
-            binding.tarHighL.helperText = "Required"
+                    binding.hypoRangeL.helperText = "Required"
+                    binding.hyperRangeL.helperText = "Required"
+                    binding.tarLowL.helperText = "Required"
+                    binding.tarHighL.helperText = "Required"
+                }.show()
         }
 
         setOnCheckedChangeListener()
@@ -114,7 +121,7 @@ class Settings : AppCompatActivity() {
                     .setMessage("Range is Invalid\n\nSettings Not Updated")
                     .setPositiveButton("Okay"){ _,_ ->
                         // do nothing
-                    }
+                    }.show()
                 return@setOnClickListener
             }
 
