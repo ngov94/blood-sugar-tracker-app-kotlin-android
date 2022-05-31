@@ -9,6 +9,7 @@ import kotlin.concurrent.schedule
 class SplashScreenActivity : AppCompatActivity() {
 
     val timer = Timer()
+    val SPLASH_TIME_OUT = 1500L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar!!.title = ""
@@ -17,7 +18,7 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
-        timer.schedule(3000){
+        timer.schedule(SPLASH_TIME_OUT){
             var intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
             startActivity(intent)
 

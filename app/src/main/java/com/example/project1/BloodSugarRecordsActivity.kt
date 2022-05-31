@@ -318,7 +318,7 @@ class BloodSugarRecordsActivity : AppCompatActivity() {
     fun progressGone(){
         Handler().postDelayed({
             progressLayout.visibility = View.GONE
-        }, 1000)
+        }, 500)
     }
 
 
