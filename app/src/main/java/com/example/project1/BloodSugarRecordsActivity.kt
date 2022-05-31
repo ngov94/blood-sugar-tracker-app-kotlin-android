@@ -15,10 +15,6 @@ import com.example.project1.databinding.ActivityBloodSugarRecordsBinding
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_blood_sugar_records.*
 import kotlinx.android.synthetic.main.bs_list_item_layout.view.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import java.sql.Date
 import java.sql.Time
 import java.text.SimpleDateFormat
@@ -26,7 +22,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class BloodSugarRecords : AppCompatActivity() {
+class BloodSugarRecordsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBloodSugarRecordsBinding
     lateinit var bsmvm: BloodSugarMasterViewModel
     lateinit var bsvm: BloodSugarViewModel
@@ -200,8 +196,8 @@ class BloodSugarRecords : AppCompatActivity() {
 
         // Insert Blood Record
         binding.btnAddBSRecord.setOnClickListener {
-            val addBSRecordIntent = Intent(this, AddBSRecord::class.java)
-            startActivity(addBSRecordIntent)
+            val addBSRecordActivityIntent = Intent(this, AddBSRecordActivity::class.java)
+            startActivity(addBSRecordActivityIntent)
         }
 
         // Update Blood Record
@@ -219,7 +215,7 @@ class BloodSugarRecords : AppCompatActivity() {
 
 
 
-                val intentUpdateBS = Intent(this@BloodSugarRecords,UpdateBSRecord::class.java)
+                val intentUpdateBS = Intent(this@BloodSugarRecordsActivity,UpdateBSRecordActivity::class.java)
                 intentUpdateBS.putExtra("bsid",bsid)
                 intentUpdateBS.putExtra("sugarConc", sugarConc)
                 intentUpdateBS.putExtra("measured", measured)
@@ -257,7 +253,7 @@ class BloodSugarRecords : AppCompatActivity() {
                 val snackbarNo = Snackbar.make(bloodsugarrecordsView!!, "Record Restored", Snackbar.LENGTH_LONG)
 
 
-                AlertDialog.Builder(this@BloodSugarRecords)
+                AlertDialog.Builder(this@BloodSugarRecordsActivity)
                     .setTitle("Confirm Deletion")
                     .setNegativeButton("Yes"){ _,_ ->
                         bsvm.deleteBloodSugar(deleteRecord)

@@ -60,4 +60,6 @@ dependencies {
 
     implementation "androidx.compose.material3:material3:1.0.0-alpha12"
     implementation "androidx.compose.material3:material3-window-size-class:1.0.0-alpha12"
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
 }

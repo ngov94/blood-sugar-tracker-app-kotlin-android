@@ -12,17 +12,15 @@ import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import com.example.project1.databinding.ActivityAddBsrecordBinding
 import com.example.project1.databinding.ActivityUpdateBsrecordBinding
 import kotlinx.android.synthetic.main.activity_add_bsrecord.*
-import kotlinx.android.synthetic.main.bs_list_item_layout.*
 import java.sql.Date
 import java.sql.Time
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
 
-class UpdateBSRecord : AppCompatActivity() {
+class UpdateBSRecordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUpdateBsrecordBinding
     lateinit var bvm: BloodSugarViewModel
     lateinit var latestMas: Master
@@ -143,7 +141,7 @@ class UpdateBSRecord : AppCompatActivity() {
            mid?.let { it1 ->  bvm.updateBloodSugar(BloodSugar(bsid = bsid, sugarConc = sc, measured = mes, date = dt, time = tm, notes = not, mid = it1)) } ///////////////
 
             Toast.makeText(this, "Record Updated!", Toast.LENGTH_LONG).show()
-            var bloodSugarIntent = Intent(this, BloodSugarRecords::class.java)
+            var bloodSugarIntent = Intent(this, BloodSugarRecordsActivity::class.java)
             startActivity(bloodSugarIntent)
 
         }

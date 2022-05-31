@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_add_bsrecord.*
 import kotlinx.android.synthetic.main.activity_settings.*
 
 
-class Settings : AppCompatActivity() {
+class SettingsActivity : AppCompatActivity() {
 
     lateinit var mvm: MasterViewModel
     private lateinit var binding: ActivitySettingsBinding

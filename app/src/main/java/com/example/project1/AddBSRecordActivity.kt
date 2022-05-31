@@ -8,12 +8,10 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PatternMatcher
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.project1.databinding.ActivityAddBsrecordBinding
 import kotlinx.android.synthetic.main.activity_add_bsrecord.*
 import java.sql.Date
@@ -22,7 +20,7 @@ import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
 
-class AddBSRecord : AppCompatActivity() {
+class AddBSRecordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddBsrecordBinding
     lateinit var mvm: MasterViewModel
     lateinit var bvm: BloodSugarViewModel
@@ -154,7 +152,7 @@ class AddBSRecord : AppCompatActivity() {
             }
 
             Toast.makeText(this, "Record Added!", Toast.LENGTH_LONG).show()
-            var bloodSugarIntent = Intent(this, BloodSugarRecords::class.java)
+            var bloodSugarIntent = Intent(this, BloodSugarRecordsActivity::class.java)
             startActivity(bloodSugarIntent)
 
 

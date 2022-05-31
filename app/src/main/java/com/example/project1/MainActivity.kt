@@ -29,8 +29,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.bsrecords.setOnClickListener {
-            var bsRecordsIntent = Intent(this, BloodSugarRecords::class.java)
+            var bsRecordsIntent = Intent(this, BloodSugarRecordsActivity::class.java)
             startActivity(bsRecordsIntent)
+        }
+
+        binding.stats.setOnClickListener {
+            var statIntent = Intent(this, AnalyticsActivity::class.java)
+            startActivity(statIntent)
         }
     }
 
@@ -42,8 +47,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        var settingsIntent = Intent(this,Settings::class.java)
-        startActivity(settingsIntent)
+        var settingsActivityIntent = Intent(this,SettingsActivity::class.java)
+        startActivity(settingsActivityIntent)
 
         return super.onOptionsItemSelected(item)
     }

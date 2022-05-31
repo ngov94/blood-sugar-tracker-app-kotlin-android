@@ -10,10 +10,12 @@ class BloodSugarViewModel(app: Application) : AndroidViewModel(app) {
 
     private val repo: BloodSugarRepository
     val allBloodSugar: LiveData<List<BloodSugar>>?
+    val dailyAvgList: LiveData<List<DailyAvgStat>>?
 
     init {
         repo = BloodSugarRepository(app)
         allBloodSugar = repo.selectAllBloodSugar()
+        dailyAvgList = repo.selectDailyAvg()
     }
 
     fun insertBloodSugar(bsugar: BloodSugar) = viewModelScope.launch{
