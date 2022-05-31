@@ -9,6 +9,8 @@
     android:gravity="center_horizontal"
     android:background="@color/trans_Purple">
 
+    <!-- <a href="https://www.flaticon.com/free-icons/diabetes" title="diabetes icons">Diabetes icons created by Freepik - Flaticon</a> -->
+
     <ImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
