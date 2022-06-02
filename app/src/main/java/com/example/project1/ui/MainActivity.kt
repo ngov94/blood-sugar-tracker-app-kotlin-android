@@ -1,4 +1,4 @@
-package com.example.project1
+package com.example.project1.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import com.example.project1.data.Master
+import com.example.project1.domain.MasterViewModel
+import com.example.project1.R
 import com.example.project1.databinding.ActivityMainBinding
-
 
 
 class MainActivity : AppCompatActivity() {
@@ -47,7 +49,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        var settingsActivityIntent = Intent(this,SettingsActivity::class.java)
+        var settingsActivityIntent = Intent(this, SettingsActivity::class.java)
         startActivity(settingsActivityIntent)
 
         return super.onOptionsItemSelected(item)

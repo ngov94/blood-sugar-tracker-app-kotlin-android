@@ -1,9 +1,7 @@
-package com.example.project1
+package com.example.project1.data
 
 import android.content.Context
 import androidx.lifecycle.LiveData
-import androidx.room.Query
-import java.sql.Date
 
 class BloodSugarMasterRepository(context: Context) {
 

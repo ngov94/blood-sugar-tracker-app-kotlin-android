@@ -1,4 +1,4 @@
-package com.example.project1
+package com.example.project1.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
@@ -9,7 +9,7 @@ interface BloodSugarDao {
     @Insert
     fun insertBloodSugar(bsugar: BloodSugar)
 
-    @Query("select * from bloodsugar")
+    @Query("select * from bloodsugar ")
     fun selectAllBloodSugar(): LiveData<List<BloodSugar>>
 
     @Query("select * from bloodsugar where bsid=:bsid")

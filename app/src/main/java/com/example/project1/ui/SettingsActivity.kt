@@ -1,12 +1,14 @@
-package com.example.project1
+package com.example.project1.ui
 
 import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.project1.data.Master
+import com.example.project1.domain.MasterViewModel
+import com.example.project1.R
 import com.example.project1.databinding.ActivitySettingsBinding
-import kotlinx.android.synthetic.main.activity_add_bsrecord.*
 import kotlinx.android.synthetic.main.activity_settings.*
 
 

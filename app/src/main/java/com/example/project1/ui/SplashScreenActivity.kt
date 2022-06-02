@@ -1,8 +1,9 @@
-package com.example.project1
+package com.example.project1.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.project1.R
 import java.util.*
 import kotlin.concurrent.schedule
 

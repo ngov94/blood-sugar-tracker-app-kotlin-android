@@ -1,4 +1,4 @@
-package com.example.project1
+package com.example.project1.ui
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -11,7 +11,12 @@ import android.widget.FrameLayout
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.project1.*
+import com.example.project1.data.BSMaster
+import com.example.project1.data.BloodSugar
 import com.example.project1.databinding.ActivityBloodSugarRecordsBinding
+import com.example.project1.domain.BloodSugarMasterViewModel
+import com.example.project1.domain.BloodSugarViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_blood_sugar_records.*
 import kotlinx.android.synthetic.main.bs_list_item_layout.view.*
@@ -201,7 +206,7 @@ class BloodSugarRecordsActivity : AppCompatActivity() {
         }
 
         // Update Blood Record
-        adapter.setOnItemClickListener(object : BloodSugarAdapter.OnItemClickListener{
+        adapter.setOnItemClickListener(object : BloodSugarAdapter.OnItemClickListener {
             override fun onItemClick(bsmView: View) {
                 println("Clicked "+ bsmView.bsid_card.text.toString())
                 var bsid = bsmView.bsid_card.text.toString().toInt()
@@ -215,7 +220,7 @@ class BloodSugarRecordsActivity : AppCompatActivity() {
 
 
 
-                val intentUpdateBS = Intent(this@BloodSugarRecordsActivity,UpdateBSRecordActivity::class.java)
+                val intentUpdateBS = Intent(this@BloodSugarRecordsActivity, UpdateBSRecordActivity::class.java)
                 intentUpdateBS.putExtra("bsid",bsid)
                 intentUpdateBS.putExtra("sugarConc", sugarConc)
                 intentUpdateBS.putExtra("measured", measured)
@@ -230,7 +235,7 @@ class BloodSugarRecordsActivity : AppCompatActivity() {
         })
 
         // Delete Blood Record
-        adapter.setOnItemLongClickListener(object : BloodSugarAdapter.OnItemLongClickListener{
+        adapter.setOnItemLongClickListener(object : BloodSugarAdapter.OnItemLongClickListener {
             override fun onItemLongClick(bsmView: View) {
                 println("Long Click "+ bsmView.bsid_card.text.toString())
 
@@ -238,7 +243,7 @@ class BloodSugarRecordsActivity : AppCompatActivity() {
                 var sugarConc = bsmView.sugar_conc_card.text.toString().toDouble()
                 var measured = bsmView.measured_card.text.toString()
                 var da = bsmView.date_card.text.toString()
-                var date: Date = Date(SimpleDateFormat("MMM d, yyyy").parse(da).time)
+                var date: Date = Date(SimpleDateFormat("MMM d, yyyy", Locale.CANADA).parse(da).time)
                 var ti = bsmView.time_card.text.toString()
                 var time: Time = Time(SimpleDateFormat("HH:mm").parse(ti).time)
                 var notes = bsmView.notes_card.text.toString()
@@ -300,7 +305,6 @@ class BloodSugarRecordsActivity : AppCompatActivity() {
     }
 
     fun pageloader(offset: Int){
-
         when(selection){
             "Old to New" -> bsmvm.selectAllBloodSugarMasterOldtoNew(offset)
             "New to Old" -> bsmvm.selectAllBloodSugarMasterNewtoOld(offset)
@@ -308,7 +312,6 @@ class BloodSugarRecordsActivity : AppCompatActivity() {
             "Low to High" -> bsmvm.selectAllBloodSugarMasterLowtoHigh(offset)
             else -> bsmvm.selectAllBloodSugarMasterPage(offset)
         }
-
     }
 
     fun progressVisable(){

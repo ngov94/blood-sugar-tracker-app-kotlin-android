@@ -1,9 +1,8 @@
-package com.example.project1
+package com.example.project1.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Query
-import java.sql.Date
 
 @Dao
 interface BloodSugarMasterDao {

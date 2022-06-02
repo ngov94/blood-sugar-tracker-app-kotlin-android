@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Project1"
         tools:targetApi="31">
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".ui.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,27 +22,27 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AnalyticsActivity"
+            android:name=".ui.AnalyticsActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".ui.MainActivity" />
         <activity
-            android:name=".UpdateBSRecordActivity"
+            android:name=".ui.UpdateBSRecordActivity"
             android:exported="false"
-            android:parentActivityName=".BloodSugarRecordsActivity" />
+            android:parentActivityName=".ui.BloodSugarRecordsActivity" />
         <activity
-            android:name=".AddBSRecordActivity"
+            android:name=".ui.AddBSRecordActivity"
             android:exported="false"
-            android:parentActivityName=".BloodSugarRecordsActivity" />
+            android:parentActivityName=".ui.BloodSugarRecordsActivity" />
         <activity
-            android:name=".BloodSugarRecordsActivity"
+            android:name=".ui.BloodSugarRecordsActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".ui.MainActivity" />
         <activity
-            android:name=".SettingsActivity"
+            android:name=".ui.SettingsActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".ui.MainActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="false"/>
     </application>
 

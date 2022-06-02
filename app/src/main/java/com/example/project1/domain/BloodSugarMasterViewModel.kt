@@ -1,7 +1,8 @@
-package com.example.project1
+package com.example.project1.domain
 
 import android.app.Application
 import androidx.lifecycle.*
+import com.example.project1.data.BloodSugarMasterRepository
 import kotlinx.coroutines.launch
 
 class BloodSugarMasterViewModel(app: Application) : AndroidViewModel(app) {

@@ -1,10 +1,7 @@
-package com.example.project1
+package com.example.project1.data
 
 import android.content.Context
 import androidx.lifecycle.LiveData
-import androidx.room.Delete
-import androidx.room.Query
-import androidx.room.Update
 
 class BloodSugarRepository(context: Context) {
 

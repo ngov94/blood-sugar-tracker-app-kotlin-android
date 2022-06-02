@@ -1,6 +1,5 @@
-package com.example.project1
+package com.example.project1.data
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey

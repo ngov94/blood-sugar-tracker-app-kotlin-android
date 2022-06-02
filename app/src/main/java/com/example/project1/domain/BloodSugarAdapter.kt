@@ -1,19 +1,16 @@
 package com.example.project1
 
-import android.app.Application
-import android.content.Context
 import android.graphics.Color
 import android.os.Build
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.project1.data.BSMaster
 import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
+import java.util.*
 
 class BloodSugarAdapter(private val bsrList: List<BSMaster>) : RecyclerView.Adapter<ViewHolder>(){
 
@@ -67,7 +64,7 @@ class BloodSugarAdapter(private val bsrList: List<BSMaster>) : RecyclerView.Adap
         }
 
         holder.sugarUnitTextView.text = item.sugarUnit
-        holder.dateTextView.setText(SimpleDateFormat("MMM d, yyyy").format(item.date.time))
+        holder.dateTextView.setText(SimpleDateFormat("MMM d, yyyy", Locale.CANADA).format(item.date.time))
         holder.timeTextView.setText(SimpleDateFormat("HH:mm").format(item.time.time))
         holder.measuredTextView.text = item.measured
         holder.notesTextView.text = item.notes

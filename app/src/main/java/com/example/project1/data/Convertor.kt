@@ -1,4 +1,4 @@
-package com.example.project1
+package com.example.project1.data
 
 import androidx.room.TypeConverter
 import java.sql.Date

@@ -1,4 +1,4 @@
-package com.example.project1
+package com.example.project1.ui
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
@@ -12,6 +12,10 @@ import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import com.example.project1.data.BloodSugar
+import com.example.project1.domain.BloodSugarViewModel
+import com.example.project1.data.Master
+import com.example.project1.R
 import com.example.project1.databinding.ActivityUpdateBsrecordBinding
 import kotlinx.android.synthetic.main.activity_add_bsrecord.*
 import java.sql.Date
@@ -132,7 +136,7 @@ class UpdateBSRecordActivity : AppCompatActivity() {
             var sc = binding.sugarConc.text.toString().toDouble()
             var mes = binding.autoCompleteMeasured.text.toString()
             var da = binding.date.text.toString()
-            var dt = Date(SimpleDateFormat("MMM d, yyyy").parse(da).time)
+            var dt = Date(SimpleDateFormat("MMM d, yyyy", Locale.CANADA).parse(da).time)
             var ti = binding.time.text.toString()
             var tm = Time(SimpleDateFormat("HH:mm").parse(ti).time)
             var not = binding.notes.text.toString()

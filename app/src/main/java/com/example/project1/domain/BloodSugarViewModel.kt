@@ -1,9 +1,12 @@
-package com.example.project1
+package com.example.project1.domain
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.example.project1.data.BloodSugar
+import com.example.project1.data.BloodSugarRepository
+import com.example.project1.data.DailyAvgStat
 import kotlinx.coroutines.launch
 
 class BloodSugarViewModel(app: Application) : AndroidViewModel(app) {
