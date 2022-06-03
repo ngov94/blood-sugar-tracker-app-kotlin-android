@@ -8,6 +8,9 @@ A simple Android application that allows users with diabetes to keep track of th
 
 * Kotlin - version 1.6.21
 * Android Studio - Chipmunk | 2021.2.1
+* Material Design 3 - version 1.0.0-alpha13
+* Room DB - version 2.4.2
+* MPAndroidChart - version 2.2.4
 
 ## Features
 
