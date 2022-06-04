@@ -22,11 +22,4 @@ class MasterViewModel(app: Application) : AndroidViewModel(app) {
         repo.insertMaster(master)
     }
 
-    fun selectLatestMaster() = viewModelScope.launch{
-        repo.selectLatestMaster()
-    }
-
-    fun selectMasterItem(mid: Int) = viewModelScope.launch{
-        repo.selectMasterItem(mid)
-    }
 }

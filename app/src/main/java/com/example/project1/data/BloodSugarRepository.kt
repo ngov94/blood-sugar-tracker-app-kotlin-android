@@ -15,10 +15,6 @@ class BloodSugarRepository(context: Context) {
         return db?.selectAllBloodSugar()
     }
 
-    fun selectBloodSugar(bsid: Int): LiveData<BloodSugar>?{
-        return db?.selectBloodSugar(bsid)
-    }
-
     fun selectDailyAvg(): LiveData<List<DailyAvgStat>>?{
         return db?.selectDailyAvg()
     }

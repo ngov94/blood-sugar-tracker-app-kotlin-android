@@ -6,16 +6,13 @@ import androidx.room.Query
 
 @Dao
 interface BloodSugarMasterDao {
-//    @Query("select bsid, sugarConc, measured, date, time, notes, sugarUnit, tarRangeLow, tarRangeHigh, hypo, hyper, bloodsugar.mid from bloodsugar inner join master on bloodsugar.mid = master.mid")
-//    fun selectAllBloodSugarMaster(): LiveData<List<BSMaster>>
 
-    @Query("select * from bloodsugar inner join master on bloodsugar.mid = master.mid")
-    fun selectAllBloodSugarMaster(): LiveData<List<BSMaster>>
 
     // Pagination
     @Query("select * from bloodsugar inner join master on bloodsugar.mid = master.mid limit 5 offset :offset")
     fun selectAllBloodSugarMasterPage(offset: Int): LiveData<List<BSMaster>>
 
+    //Total number of elements
     @Query("select count(bsid) from bloodsugar inner join master on bloodsugar.mid = master.mid")
     fun selectTotalBloodSugarMaster(): LiveData<Int>
 
@@ -37,10 +34,6 @@ interface BloodSugarMasterDao {
     fun selectAllBloodSugarMasterLowtoHigh(offset: Int): LiveData<List<BSMaster>>
 
     // FOR SEARCH
-//    // By Date
-//    @Query("select * from bloodsugar inner join master on bloodsugar.mid = master.mid where date=:searchdate")
-//    fun selectAllBSMDate(searchdate: Date): LiveData<List<BSMaster>>
-
     // By Notes
     @Query("select * from bloodsugar inner join master on bloodsugar.mid = master.mid where upper(notes) like :searchnotes")
     fun selectAllBSMNotes(searchnotes: String): LiveData<List<BSMaster>>

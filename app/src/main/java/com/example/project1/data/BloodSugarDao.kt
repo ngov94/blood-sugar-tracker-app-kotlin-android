@@ -9,11 +9,8 @@ interface BloodSugarDao {
     @Insert
     fun insertBloodSugar(bsugar: BloodSugar)
 
-    @Query("select * from bloodsugar ")
+    @Query("select * from bloodsugar order by date")
     fun selectAllBloodSugar(): LiveData<List<BloodSugar>>
-
-    @Query("select * from bloodsugar where bsid=:bsid")
-    fun selectBloodSugar(bsid: Int): LiveData<BloodSugar>
 
     // for daily average statistics
     @Query("select date as day, AVG(sugarConc) as dailyAvg from bloodsugar group by date order by date")

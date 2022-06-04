@@ -25,18 +25,6 @@ class BloodSugarViewModel(app: Application) : AndroidViewModel(app) {
         repo.insertBloodSugar(bsugar)
     }
 
-    fun selectAllBloodSugar() = viewModelScope.launch{
-        repo.selectAllBloodSugar()
-    }
-
-    fun selectBloodSugar(bsid: Int) = viewModelScope.launch{
-        repo.selectBloodSugar(bsid)
-    }
-
-    fun selectDailyAvg() = viewModelScope.launch{
-        repo.selectDailyAvg()
-    }
-
     fun updateBloodSugar(bsugar: BloodSugar) = viewModelScope.launch{
         repo.updateBloodSugar(bsugar)
     }

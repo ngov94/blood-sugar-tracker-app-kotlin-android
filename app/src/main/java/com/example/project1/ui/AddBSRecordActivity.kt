@@ -133,7 +133,7 @@ class AddBSRecordActivity : AppCompatActivity() {
             var da = binding.date.text.toString()
             var dt = Date(SimpleDateFormat("MMM d, yyyy", Locale.CANADA).parse(da).time)
             var ti = binding.time.text.toString()
-            var tm = Time(SimpleDateFormat("HH:mm").parse(ti).time)
+            var tm = Time(SimpleDateFormat("HH:mm", Locale.CANADA).parse(ti).time)
 
 
 
@@ -206,7 +206,7 @@ class AddBSRecordActivity : AppCompatActivity() {
             cal.set(Calendar.MINUTE, minute)
             binding.timeL.helperText = null
             binding.timeL.error = null
-            binding.time.setText(SimpleDateFormat(format).format(cal.time))
+            binding.time.setText(SimpleDateFormat(format, Locale.CANADA).format(cal.time))
         }
 
         setOnClickListener {

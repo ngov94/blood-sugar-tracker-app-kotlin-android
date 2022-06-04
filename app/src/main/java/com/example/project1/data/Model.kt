@@ -29,6 +29,8 @@ data class Master(@PrimaryKey(autoGenerate = true) var mid: Int? = null,
 
 data class DailyAvgStat(var day: Date, var dailyAvg: Double)
 
+data class AllRecordStat(var date: Date, var sugarConc: Double)
+
 data class BSMaster(var bsid: Int,
                     var sugarConc: Double,
                     var measured: String,

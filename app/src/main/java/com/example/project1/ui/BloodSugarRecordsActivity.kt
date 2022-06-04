@@ -69,12 +69,6 @@ class BloodSugarRecordsActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
 
-//        bsmvm.allBloodSugarMaster?.observe(this){ bsmList ->
-//            this.bsmListAll.clear()
-//            this.bsmListAll.addAll(bsmList)
-//            getBloodSugarRecords(bsmList)
-//        }
-
         // Pagnation
         bsmvm.bsmPages?.observe(this){  bsmList ->
             this.bsmListCurrent.clear()
@@ -245,7 +239,7 @@ class BloodSugarRecordsActivity : AppCompatActivity() {
                 var da = bsmView.date_card.text.toString()
                 var date: Date = Date(SimpleDateFormat("MMM d, yyyy", Locale.CANADA).parse(da).time)
                 var ti = bsmView.time_card.text.toString()
-                var time: Time = Time(SimpleDateFormat("HH:mm").parse(ti).time)
+                var time: Time = Time(SimpleDateFormat("HH:mm", Locale.CANADA).parse(ti).time)
                 var notes = bsmView.notes_card.text.toString()
                 var mid = bsmView.mid_card.text.toString().toInt()
 

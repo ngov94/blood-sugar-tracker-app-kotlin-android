@@ -7,15 +7,11 @@ class BloodSugarMasterRepository(context: Context) {
 
     var db: BloodSugarMasterDao? = AppDatabase.getInstance(context)?.bsMasterDao()
 
-    fun selectAllBloodSugarMaster(): LiveData<List<BSMaster>>?{
-        return db?.selectAllBloodSugarMaster()
-    }
-
     // Pagination
     fun selectAllBloodSugarMasterPage(offset: Int): LiveData<List<BSMaster>>?{
         return db?.selectAllBloodSugarMasterPage(offset)
     }
-
+    // For total number of records in the list
     fun selectTotalBloodSugarMaster(): LiveData<Int>?{
         return db?.selectTotalBloodSugarMaster()
     }
@@ -42,11 +38,6 @@ class BloodSugarMasterRepository(context: Context) {
     }
 
     // FOR SEARCH
-//    // By Date
-//    fun selectAllBSMDate(searchdate: Date): LiveData<List<BSMaster>>?{
-//        return db?.selectAllBSMDate(searchdate)
-//    }
-
     // By Notes
     fun selectAllBSMNotes(searchnotes: String): LiveData<List<BSMaster>>?{
         val search = db?.selectAllBSMNotes(searchnotes)

@@ -16,7 +16,4 @@ class MasterRepository(context: Context) {
         return db?.selectLatestMaster()
     }
 
-    fun selectMasterItem(mid: Int): LiveData<Master>?{
-        return db?.selectMasterItem(mid)
-    }
 }
