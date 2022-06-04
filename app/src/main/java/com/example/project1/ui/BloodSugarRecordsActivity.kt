@@ -279,7 +279,7 @@ class BloodSugarRecordsActivity : AppCompatActivity() {
             binding.noRecords.visibility = View.GONE
         }
 
-        adapter.notifyDataSetChanged()//let adapter know the data changed
+        adapter.notifyDataSetChanged()//let adapter know the data changedkvjk
     }
 
     fun nextPrevButtonVisability(){
